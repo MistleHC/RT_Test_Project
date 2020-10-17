@@ -1,4 +1,4 @@
-package cloudcode.helloworld;
+package cloud.test;
 
 import java.util.Collections;
 import org.slf4j.Logger;
