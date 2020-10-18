@@ -3,12 +3,14 @@ package cloud.test.web.Controllers;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import cloud.test.web.DAO.AvroDao;
 import example.gcp.Client;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,12 @@ public final class HelloWorldController {
 
   private static String project;
   private static final Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
+  private final AvroDao avroDao;
+
+  @Autowired
+  public HelloWorldController (AvroDao avroDao) {
+    this.avroDao = avroDao;
+  }
 
   @GetMapping("/")
   public String helloWorld(Model model) {
@@ -39,6 +47,9 @@ public final class HelloWorldController {
     model.addAttribute("revision", revision);
     model.addAttribute("service", service);
     model.addAttribute("project", project);
+
+    avroDao.checkNewFiles();
+    logger.info(Thread.currentThread().getName()+" file check was executed.");
     return "index";
   }
 

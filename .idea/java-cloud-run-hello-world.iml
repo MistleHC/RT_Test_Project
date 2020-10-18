@@ -151,6 +151,12 @@
     <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java-util:3.11.4" level="project" />
     <orderEntry type="library" name="Maven: org.threeten:threetenbp:1.4.4" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:29.0-android" level="project" />
+    <orderEntry type="library" name="Maven: com.google.cloud:google-cloud-bigquery:1.111.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.8" level="project" />
+    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.11" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.11" level="project" />
+    <orderEntry type="library" name="Maven: com.google.apis:google-api-services-bigquery:v2-rev20200324-1.30.9" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-gcp-starter-logging:1.2.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-gcp-starter:1.2.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-gcp-core:1.2.3.RELEASE" level="project" />
