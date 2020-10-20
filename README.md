@@ -1,4 +1,4 @@
-# Test appliation for RinfTech Intership
+# Test appliation for RinfTech Internship
 
 
 API:
