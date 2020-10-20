@@ -6,22 +6,19 @@ import example.gcp.Client;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.io.IOException;
 //GCP
-import cloud.test.web.Controllers.HelloWorldController;
 import cloud.test.web.DAO.AvroDao;
 import com.google.api.gax.paging.Page;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.common.collect.Lists;
 import com.google.cloud.storage.*;
 //Avro
+import example.gcp.ClientEx;
 import org.apache.avro.file.DataFileReader;
 import org.apache.avro.file.DataFileWriter;
 import org.apache.avro.io.DatumReader;
 import org.apache.avro.io.DatumWriter;
-import org.apache.avro.io.Decoder;
-import org.apache.avro.io.DecoderFactory;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificDatumWriter;
 import org.apache.commons.compress.utils.IOUtils;
@@ -38,7 +35,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-//BigQuery
 
 
 @Repository
@@ -55,12 +51,12 @@ public class AvroDaoImpl implements AvroDao {
     }
 
     @Override
-    public void uploadClient(Client client) {
+    public void uploadClient(ClientEx client) {
         String objectName = "client-" + String.valueOf(client.getId()) +".avro";
         File avroOutput = new File(objectName);
         try {
-            DatumWriter<Client> clientDatumWriter = new SpecificDatumWriter<Client>(Client.class);
-            DataFileWriter<Client> dataFileWriter = new DataFileWriter<Client>(clientDatumWriter);
+            DatumWriter<ClientEx> clientDatumWriter = new SpecificDatumWriter<ClientEx>(ClientEx.class);
+            DataFileWriter<ClientEx> dataFileWriter = new DataFileWriter<ClientEx>(clientDatumWriter);
             dataFileWriter.create(client.getSchema(), avroOutput);
             dataFileWriter.append(client);
             dataFileWriter.close();
@@ -70,7 +66,7 @@ public class AvroDaoImpl implements AvroDao {
                     avroOutput.getName(), "text/plain", IOUtils.toByteArray(input));
 
             uploadObjectToBucket(objectName, objectName, output);
-        } catch (IOException e) {System.out.println("Error writing Avro");}
+        } catch (IOException e) {logger.error("Error writing Avro");}
     }
 
     public void checkNewFiles() {
@@ -86,7 +82,7 @@ public class AvroDaoImpl implements AvroDao {
                 storage.delete("avro_bucket-1", blob.getName());
                 logger.info("Object " + blob.getName() + "was deleted from the bucket avro_bucket-1");
             }
-        } catch (IOException e) {System.out.println("Error while checking files");}
+        } catch (IOException e) {logger.error("Error while checking files");}
     }
 
     private void uploadObjectToBucket(String objectName, String filePath, MultipartFile file)  throws IOException{
@@ -101,14 +97,14 @@ public class AvroDaoImpl implements AvroDao {
     private void avroDeserializeAndQuery(String fileName) {
         try{
             File file = new File(fileName);
-            DatumReader<Client> clientDatumReader = new SpecificDatumReader<Client>(Client.class);
-            DataFileReader<Client> dataFileReader = new DataFileReader<Client>(file, clientDatumReader);
-            Client client = null;
+            DatumReader<ClientEx> clientDatumReader = new SpecificDatumReader<ClientEx>(ClientEx.class);
+            DataFileReader<ClientEx> dataFileReader = new DataFileReader<ClientEx>(file, clientDatumReader);
+            ClientEx client = null;
             while (dataFileReader.hasNext()) {
                 client = dataFileReader.next(client);
                 logger.info(client.toString());
                 logger.info("ID: " + client.getId() + " Name: " + client.getName());
-                saveClientToBigQuery(client.getId(), client.getName().toString(), client.getPhone().toString(), client.getAddress().toString());
+                saveClientToBigQuery(client.getId(), client.getName().toString(), client.getPhone().toString(), client.getAddress().toString(), client.getVerified(), client.getBill());
             }
             dataFileReader.close();
             logger.info("File "+ fileName +" was deserialized");
@@ -119,7 +115,7 @@ public class AvroDaoImpl implements AvroDao {
         }
     }
 
-    private void saveClientToBigQuery(long id, String name, String phone, String address) {
+    private void saveClientToBigQuery(long id, String name, String phone, String address, boolean verified, float bill) {
         try {
         GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("credentials.json")).createScoped(Lists.newArrayList("https://www.googleapis.com/auth/cloud-platform"));
         BigQuery bigquery = BigQueryOptions.newBuilder().setCredentials(credentials).build().getService();
@@ -129,6 +125,8 @@ public class AvroDaoImpl implements AvroDao {
             clientFull.put("name", name);
             clientFull.put("phone", phone);
             clientFull.put("address", address);
+            clientFull.put("verified", verified);
+            clientFull.put("bill", bill);
             Map<String, Object> clientReq = new HashMap<>();
             clientReq.put("id", id);
             clientReq.put("name", name);
@@ -155,7 +153,7 @@ public class AvroDaoImpl implements AvroDao {
                     logger.error("Query error log entry: " + entry);
                 }
             }
-        } catch (IOException e) {System.out.println("Error while working with BigQuery");}
+        } catch (IOException e) {logger.error("Error while working with BigQuery");}
     }
 
     private void authorize() {
@@ -175,7 +173,7 @@ public class AvroDaoImpl implements AvroDao {
                     "}\n");
             myWriter.close();
             logger.info("Credentials were created!");
-        } catch (IOException e) {System.out.println("Error creating credentials");}
+        } catch (IOException e) {logger.error("Error creating credentials");}
     }
 
 }

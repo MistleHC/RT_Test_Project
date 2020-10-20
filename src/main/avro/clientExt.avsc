@@ -1,0 +1,12 @@
+{"namespace": "example.gcp",
+ "type": "record",
+ "name": "ClientEx",
+ "fields": [
+ 	 {"name": "id", "type": "long"},
+ 	 {"name": "name", "type": "string"},
+	 {"name": "phone", "type": ["string", "null"]},
+	 {"name": "address", "type": ["string", "null"]},
+	 {"name": "verified", "type": "boolean"},
+	 {"name": "bill", "type": "float"}
+ ]
+}

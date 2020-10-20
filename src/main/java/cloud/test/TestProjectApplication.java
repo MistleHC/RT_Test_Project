@@ -7,11 +7,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
-/** This class serves as an entry point for the Spring Boot app. */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-public class HelloWorldApplication {
+public class TestProjectApplication {
 
-  private static final Logger logger = LoggerFactory.getLogger(HelloWorldApplication.class);
+  private static final Logger logger = LoggerFactory.getLogger(TestProjectApplication.class);
 
   public static void main(final String[] args) throws Exception {
     String port = System.getenv("PORT");
@@ -19,12 +18,10 @@ public class HelloWorldApplication {
       port = "8080";
       logger.warn("$PORT environment variable not set, defaulting to 8080");
     }
-    SpringApplication app = new SpringApplication(HelloWorldApplication.class);
+    SpringApplication app = new SpringApplication(TestProjectApplication.class);
     app.setDefaultProperties(Collections.singletonMap("server.port", port));
 
-    // Start the Spring Boot application.
     app.run(args);
-    logger.info(
-        "Hello from Cloud Run! The container started successfully and is listening for HTTP requests on $PORT");
+    logger.info("The container started successfully and is listening for HTTP requests on $PORT");
   }
 }
