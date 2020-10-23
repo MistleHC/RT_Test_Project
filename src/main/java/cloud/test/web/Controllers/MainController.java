@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import cloud.test.web.DAO.AvroDao;
+import cloud.test.web.EventHandlers.AvroBucketEventHandler;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -42,7 +43,6 @@ public final class MainController {
     model.addAttribute("service", service);
     model.addAttribute("project", project);
 
-    avroDao.checkNewFiles();
     logger.info(Thread.currentThread().getName()+" file check was executed.");
     return "index";
   }

@@ -133,7 +133,6 @@
     <orderEntry type="library" name="Maven: com.google.api-client:google-api-client:1.30.7" level="project" />
     <orderEntry type="library" name="Maven: com.google.oauth-client:google-oauth-client:1.31.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.apis:google-api-services-storage:v1-rev20200814-1.30.10" level="project" />
-    <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.5" level="project" />
     <orderEntry type="library" name="Maven: com.google.cloud:google-cloud-core:1.93.4" level="project" />
     <orderEntry type="library" name="Maven: com.google.auto.value:auto-value-annotations:1.7.2" level="project" />
     <orderEntry type="library" name="Maven: com.google.api.grpc:proto-google-common-protos:1.17.0" level="project" />
@@ -157,6 +156,23 @@
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.11" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.11" level="project" />
     <orderEntry type="library" name="Maven: com.google.apis:google-api-services-bigquery:v2-rev20200324-1.30.9" level="project" />
+    <orderEntry type="library" name="Maven: com.google.cloud:google-cloud-pubsub:1.105.0" level="project" />
+    <orderEntry type="library" name="Maven: io.grpc:grpc-api:1.29.0" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.mojo:animal-sniffer-annotations:1.18" level="project" />
+    <orderEntry type="library" name="Maven: io.grpc:grpc-stub:1.29.0" level="project" />
+    <orderEntry type="library" name="Maven: io.grpc:grpc-protobuf:1.29.0" level="project" />
+    <orderEntry type="library" name="Maven: io.grpc:grpc-protobuf-lite:1.29.0" level="project" />
+    <orderEntry type="library" name="Maven: com.google.api.grpc:proto-google-cloud-pubsub-v1:1.87.0" level="project" />
+    <orderEntry type="library" name="Maven: com.google.api:gax-grpc:1.56.0" level="project" />
+    <orderEntry type="library" name="Maven: io.grpc:grpc-auth:1.29.0" level="project" />
+    <orderEntry type="library" name="Maven: io.grpc:grpc-netty-shaded:1.29.0" level="project" />
+    <orderEntry type="library" name="Maven: io.grpc:grpc-alts:1.29.0" level="project" />
+    <orderEntry type="library" name="Maven: io.grpc:grpc-grpclb:1.29.0" level="project" />
+    <orderEntry type="library" name="Maven: org.conscrypt:conscrypt-openjdk-uber:2.2.1" level="project" />
+    <orderEntry type="library" name="Maven: io.grpc:grpc-core:1.29.0" level="project" />
+    <orderEntry type="library" name="Maven: com.google.android:annotations:4.1.1.4" level="project" />
+    <orderEntry type="library" name="Maven: io.perfmark:perfmark-api:0.19.0" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.6" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-gcp-starter-logging:1.2.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-gcp-starter:1.2.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-gcp-core:1.2.3.RELEASE" level="project" />
@@ -166,22 +182,8 @@
     <orderEntry type="library" name="Maven: ch.qos.logback.contrib:logback-json-core:0.1.5" level="project" />
     <orderEntry type="library" name="Maven: com.google.cloud:google-cloud-logging-logback:0.117.0-alpha" level="project" />
     <orderEntry type="library" name="Maven: com.google.cloud:google-cloud-logging:1.101.1" level="project" />
-    <orderEntry type="library" name="Maven: io.grpc:grpc-api:1.29.0" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.mojo:animal-sniffer-annotations:1.18" level="project" />
-    <orderEntry type="library" name="Maven: io.grpc:grpc-stub:1.29.0" level="project" />
-    <orderEntry type="library" name="Maven: io.grpc:grpc-protobuf:1.29.0" level="project" />
-    <orderEntry type="library" name="Maven: io.grpc:grpc-protobuf-lite:1.29.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.api.grpc:proto-google-cloud-logging-v2:0.84.1" level="project" />
-    <orderEntry type="library" name="Maven: com.google.api:gax-grpc:1.56.0" level="project" />
-    <orderEntry type="library" name="Maven: io.grpc:grpc-auth:1.29.0" level="project" />
-    <orderEntry type="library" name="Maven: io.grpc:grpc-netty-shaded:1.29.0" level="project" />
-    <orderEntry type="library" name="Maven: io.grpc:grpc-alts:1.29.0" level="project" />
-    <orderEntry type="library" name="Maven: io.grpc:grpc-grpclb:1.29.0" level="project" />
-    <orderEntry type="library" name="Maven: org.conscrypt:conscrypt-openjdk-uber:2.2.1" level="project" />
     <orderEntry type="library" name="Maven: com.google.cloud:google-cloud-core-grpc:1.93.4" level="project" />
-    <orderEntry type="library" name="Maven: io.grpc:grpc-core:1.29.0" level="project" />
-    <orderEntry type="library" name="Maven: com.google.android:annotations:4.1.1.4" level="project" />
-    <orderEntry type="library" name="Maven: io.perfmark:perfmark-api:0.19.0" level="project" />
     <orderEntry type="library" name="Maven: com.squareup.okhttp3:okhttp:4.0.1" level="project" />
     <orderEntry type="library" name="Maven: com.squareup.okio:okio:2.2.2" level="project" />
     <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:1.2.71" level="project" />

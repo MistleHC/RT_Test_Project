@@ -1,5 +1,6 @@
 package cloud.test.web.DAO.impl;
 
+import cloud.test.web.EventHandlers.AvroBucketEventHandler;
 import com.google.cloud.bigquery.*;
 import example.gcp.Client;
 
@@ -48,6 +49,7 @@ public class AvroDaoImpl implements AvroDao {
     public AvroDaoImpl(Environment env) {
         this.env = env;
         authorize();
+        fileCheckThread();
     }
 
     @Override
@@ -69,14 +71,14 @@ public class AvroDaoImpl implements AvroDao {
         } catch (IOException e) {logger.error("Error writing Avro");}
     }
 
-    public void checkNewFiles() {
+    public void downloadFile(String name) {
         try {
             GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("credentials.json")).createScoped(Lists.newArrayList("https://www.googleapis.com/auth/cloud-platform"));
             Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
             Bucket bucket = storage.get("avro_bucket-1");
-            Page<Blob> blobs = bucket.list();
-            for (Blob blob : blobs.iterateAll()) {
-                logger.info("Blob: " + blob.getName());
+            Blob blob = bucket.get(name);
+            if(blob != null) {
+                logger.info("Received blob: " + blob);
                 blob.downloadTo(Paths.get(blob.getName()));
                 avroDeserializeAndQuery(blob.getName());
                 storage.delete("avro_bucket-1", blob.getName());
@@ -103,7 +105,6 @@ public class AvroDaoImpl implements AvroDao {
             while (dataFileReader.hasNext()) {
                 client = dataFileReader.next(client);
                 logger.info(client.toString());
-                logger.info("ID: " + client.getId() + " Name: " + client.getName());
                 saveClientToBigQuery(client.getId(), client.getName().toString(), client.getPhone().toString(), client.getAddress().toString(), client.getVerified(), client.getBill());
             }
             dataFileReader.close();
@@ -174,6 +175,26 @@ public class AvroDaoImpl implements AvroDao {
             myWriter.close();
             logger.info("Credentials were created!");
         } catch (IOException e) {logger.error("Error creating credentials");}
+    }
+
+    private void fileCheckThread() {
+        AvroBucketEventHandler avroBucketEventHandler = new AvroBucketEventHandler(this);
+
+        Thread thread = new Thread(){
+            public void run(){
+                try {
+                    while(true) {
+                        logger.info("Subscribe thread logged");
+                        avroBucketEventHandler.subscribeOnAvroBucketNewFiles();
+                        Thread.sleep(20 * 1000);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        thread.start();
     }
 
 }

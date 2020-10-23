@@ -6,5 +6,5 @@ import example.gcp.ClientEx;
 public interface AvroDao {
     public void uploadClient(ClientEx client);
 
-    void checkNewFiles();
+    void downloadFile(String name);
 }
