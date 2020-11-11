@@ -3,6 +3,7 @@ package cloud.test.web;
 public class Constants {
     //URLS
     public static final String AVRO_URLS = "/api/avro";
+    public static final String BUCKET_URLS = "/api/bucket";
 
 
     //EXCEPTION MESSAGES

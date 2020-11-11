@@ -1,6 +1,5 @@
 package cloud.test.web.DAO.impl;
 
-import cloud.test.web.EventHandlers.AvroBucketEventHandler;
 import com.google.cloud.bigquery.*;
 import example.gcp.Client;
 
@@ -49,7 +48,6 @@ public class AvroDaoImpl implements AvroDao {
     public AvroDaoImpl(Environment env) {
         this.env = env;
         authorize();
-        fileCheckThread();
     }
 
     @Override
@@ -175,26 +173,6 @@ public class AvroDaoImpl implements AvroDao {
             myWriter.close();
             logger.info("Credentials were created!");
         } catch (IOException e) {logger.error("Error creating credentials");}
-    }
-
-    private void fileCheckThread() {
-        AvroBucketEventHandler avroBucketEventHandler = new AvroBucketEventHandler(this);
-
-        Thread thread = new Thread(){
-            public void run(){
-                try {
-                    while(true) {
-                        logger.info("Subscribe thread logged");
-                        avroBucketEventHandler.subscribeOnAvroBucketNewFiles();
-                        Thread.sleep(20 * 1000);
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        thread.start();
     }
 
 }

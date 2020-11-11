@@ -38,4 +38,9 @@ public class AvroServiceImpl implements AvroService {
         logger.info(client.toString());
         avroDao.uploadClient(client);
     }
+
+    @Override
+    public void downloadFile(String name) {
+        avroDao.downloadFile(name);
+    }
 }

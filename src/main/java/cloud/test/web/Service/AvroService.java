@@ -5,4 +5,6 @@ import example.gcp.Client;
 
 public interface AvroService {
     void generateAvro(DtoClient dtoClient);
+
+    void downloadFile(String name);
 }

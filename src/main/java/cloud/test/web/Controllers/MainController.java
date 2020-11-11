@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import cloud.test.web.DAO.AvroDao;
-import cloud.test.web.EventHandlers.AvroBucketEventHandler;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -45,6 +44,12 @@ public final class MainController {
 
     logger.info(Thread.currentThread().getName()+" file check was executed.");
     return "index";
+  }
+
+  @GetMapping("/googlebf6d367ea1d27bbc.html")
+  public String domainVerification() {
+
+    return "googlebf6d367ea1d27bbc";
   }
 
   public static String getProjectId() {
