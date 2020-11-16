@@ -1,7 +1,7 @@
 # Test appliation for RinfTech Internship
 
 
-![GCP-service-diagram](GCP-service-diagram.png)
+![Service-diagram](Service-diagram.png)
 
 
 
