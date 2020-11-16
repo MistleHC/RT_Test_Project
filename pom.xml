@@ -72,6 +72,19 @@
     </dependency>
 
     <dependency>
+      <groupId>com.google.cloud.functions</groupId>
+      <artifactId>functions-framework-api</artifactId>
+      <version>1.0.2</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.cloud.functions</groupId>
+      <artifactId>function-maven-plugin</artifactId>
+      <version>0.9.5</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>google-cloud-storage</artifactId>
       <version>1.113.1</version>
@@ -93,6 +106,11 @@
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
       <version>2.8.6</version>
+    </dependency>
+    <dependency>
+      <groupId>com.googlecode.json-simple</groupId>
+      <artifactId>json-simple</artifactId>
+      <version>1.1</version>
     </dependency>
 
     <dependency>
@@ -116,6 +134,21 @@
   </dependencies>
   <build>
     <plugins>
+      <plugin>
+        <!--
+          Google Cloud Functions Framework Maven plugin
+          This plugin allows you to run Cloud Functions Java code
+          locally. Use the following terminal command to run a
+          given function locally:
+          mvn function:run -Drun.functionTarget=your.package.yourFunction
+        -->
+        <groupId>com.google.cloud.functions</groupId>
+        <artifactId>function-maven-plugin</artifactId>
+        <version>0.9.5</version>
+        <configuration>
+          <functionTarget>functions.HelloPubSub</functionTarget>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>com.google.cloud.tools</groupId>
         <artifactId>jib-maven-plugin</artifactId>

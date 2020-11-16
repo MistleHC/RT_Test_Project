@@ -5,7 +5,6 @@ import cloud.test.web.Controllers.DTO.DtoClient;
 import cloud.test.web.Controllers.Validators.DataValidator;
 import cloud.test.web.DAO.AvroDao;
 import cloud.test.web.DAO.impl.AvroDaoImpl;
-import cloud.test.web.EventHandlers.AvroBucketEventHandler;
 import cloud.test.web.Service.AvroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
