@@ -3,8 +3,6 @@ package cloud.test.web.Controllers;
 import cloud.test.web.Constants;
 import cloud.test.web.Controllers.DTO.DtoClient;
 import cloud.test.web.Controllers.Validators.DataValidator;
-import cloud.test.web.DAO.AvroDao;
-import cloud.test.web.DAO.impl.AvroDaoImpl;
 import cloud.test.web.Service.AvroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,12 +14,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(Constants.AVRO_URLS)
 public class AvroController {
     final private AvroService avroService;
-    final private AvroDao avroDao;
 
     @Autowired
-    public AvroController(AvroService avroService, AvroDao avroDao) {
+    public AvroController(AvroService avroService) {
         this.avroService = avroService;
-        this.avroDao = avroDao;
     }
 
     @PostMapping("/generate")

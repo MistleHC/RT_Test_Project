@@ -15,12 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Base64;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -30,12 +26,10 @@ public class BucketController {
 
     private static final Logger logger = LoggerFactory.getLogger(BucketController.class);
     final private AvroService avroService;
-    final private AvroDao avroDao;
 
     @Autowired
-    public BucketController(AvroService avroService, AvroDao avroDao) {
+    public BucketController(AvroService avroService) {
         this.avroService = avroService;
-        this.avroDao = avroDao;
     }
 
     @PostMapping("/change")
