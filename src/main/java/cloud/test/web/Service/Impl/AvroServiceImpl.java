@@ -27,7 +27,7 @@ public class AvroServiceImpl implements AvroService {
     @Override
     public void generateAvro(DtoClient dtoClient) {
         ClientEx client = new ClientEx();
-        client.setId(new Random().nextLong());
+        client.setId(Math.abs(new Random().nextLong()));
         client.setName(dtoClient.getName());
         if(DataValidator.isNotEmptyCheck(dtoClient.getPhone())) {client.setPhone(dtoClient.getPhone());}
         if(DataValidator.isNotEmptyCheck(dtoClient.getAddress())) {client.setAddress(dtoClient.getAddress());}
